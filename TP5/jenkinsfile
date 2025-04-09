@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        nodejs "NodeJS"  // Utilise l'installation NodeJS configurée dans Jenkins
+        nodejs "NodeJS"
     }
 
     environment {
@@ -13,21 +13,27 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Node.js dependencies...'
-                sh 'npm install'
+                dir('TP5') {  // Naviguer vers le dossier TP5
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'npm test'
+                dir('TP5') {  // Naviguer vers le dossier TP5
+                    sh 'npm test'
+                }
             }
         }
 
         stage('Build Project') {
             steps {
                 echo 'Building the project...'
-                sh 'npm run build'
+                dir('TP5') {  // Naviguer vers le dossier TP5
+                    sh 'npm run build'
+                }
             }
         }
 
